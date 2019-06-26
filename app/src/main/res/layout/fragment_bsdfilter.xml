@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".BSDFilterFragment">
+        tools:context=".filter_bsd.BSDFilterFragment">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

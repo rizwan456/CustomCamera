@@ -1,13 +1,14 @@
-package com.rizz.customcamera;
+package com.rizz.customcamera.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.rizz.customcamera.interfaces.IFilterClicked;
+import com.rizz.customcamera.R;
 import com.rizz.customcamera.databinding.FilterItemsBinding;
 import com.rizz.customcamera.model.Filter;
 
@@ -64,15 +65,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             filterItemsBinding.filterImage.setOnClickListener(v -> {
                 iFilterClicked.onClickFilter(filterList.get(pos).getFilterId());
-                index = pos;
-                notifyDataSetChanged();
             });
-
-            if (index == pos) {
-                filterItemsBinding.filterName.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            } else {
-                filterItemsBinding.filterName.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
-            }
         }
     }
 }

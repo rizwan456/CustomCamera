@@ -1,4 +1,4 @@
-package com.rizz.customcamera;
+package com.rizz.customcamera.filter_bsd;
 
 
 import android.annotation.SuppressLint;
@@ -12,11 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.rizz.customcamera.adapters.FilterAdapter;
+import com.rizz.customcamera.interfaces.IFilterClicked;
+import com.rizz.customcamera.R;
+import com.rizz.customcamera.Utility;
 import com.rizz.customcamera.databinding.FragmentBsdfilterBinding;
-import com.rizz.customcamera.model.Filter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -85,7 +85,7 @@ public class BSDFilterFragment extends BottomSheetDialogFragment {
 
     private void setUp() {
         bsdfilterBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.HORIZONTAL, false));
-        bsdfilterBinding.recyclerView.setAdapter(new FilterAdapter(generateFilter(), getActivity(),iFilterClicked));
+        bsdfilterBinding.recyclerView.setAdapter(new FilterAdapter(Utility.generateFilter(), getActivity(),iFilterClicked));
         bsdfilterBinding.cancelBtn.setOnClickListener(v -> {
             this.dismiss();
         });
@@ -94,21 +94,5 @@ public class BSDFilterFragment extends BottomSheetDialogFragment {
         });
     }
 
-    public List<Filter> generateFilter() {
-        List<Filter> list = new ArrayList<>();
-        list.add(new Filter(1, "Normal"));
-        list.add(new Filter(2, "H1"));
-        list.add(new Filter(3, "O2"));
-        list.add(new Filter(4, "B3"));
-        list.add(new Filter(5, "H2"));
-        list.add(new Filter(6, "J6"));
-        list.add(new Filter(7, "R1"));
-        list.add(new Filter(8, "j9"));
-        list.add(new Filter(9, "D1"));
-        list.add(new Filter(10, "L1"));
-        list.add(new Filter(11, "R5"));
-        list.add(new Filter(12, "H11"));
-        return list;
-    }
 
 }

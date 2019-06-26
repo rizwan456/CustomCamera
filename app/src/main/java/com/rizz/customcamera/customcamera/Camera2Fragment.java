@@ -1,18 +1,22 @@
-package com.rizz.customcamera;
+package com.rizz.customcamera.customcamera;
 
 
 import android.databinding.DataBindingUtil;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rizz.customcamera.adapters.FilterAdapter;
+import com.rizz.customcamera.interfaces.IFilterClicked;
+import com.rizz.customcamera.R;
+import com.rizz.customcamera.Utility;
 import com.rizz.customcamera.databinding.FragmentCamera2Binding;
 
 import java.io.File;
@@ -29,7 +33,7 @@ import static android.content.ContentValues.TAG;
  * Use the {@link Camera2Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Camera2Fragment extends Fragment implements IFilterClicked{
+public class Camera2Fragment extends Fragment implements IFilterClicked {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,7 +85,7 @@ public class Camera2Fragment extends Fragment implements IFilterClicked{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        camera2Binding= DataBindingUtil.inflate(inflater,R.layout.fragment_camera2, container, false);
+        camera2Binding= DataBindingUtil.inflate(inflater, R.layout.fragment_camera2, container, false);
         setUp();
         return camera2Binding.getRoot();
     }
@@ -89,11 +93,13 @@ public class Camera2Fragment extends Fragment implements IFilterClicked{
     private void setUp() {
         CameraPreview cameraPreview=new CameraPreview(getActivity(),mCamera);
         camera2Binding.cameraFrame.addView(cameraPreview);
-        camera2Binding.filterImage.setOnClickListener(v->{
+       /* camera2Binding.filterImage.setOnClickListener(v->{
            // BSDFilterFragment.newInstance(null,null).show(getChildFragmentManager(),"BSDFilterFragment");
             BSDFilterFragment bsdFilterFragment=new BSDFilterFragment(this);
             bsdFilterFragment.show(getChildFragmentManager(),"BSDFilterFragment");
-        });
+        });*/
+       camera2Binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+       camera2Binding.recyclerView.setAdapter(new FilterAdapter(Utility.generateFilter(),getActivity(),this));
 
         camera2Binding.cameraBtn.setOnClickListener(v->{
             mCamera.takePicture(null,null,mPicture);
@@ -214,4 +220,5 @@ public class Camera2Fragment extends Fragment implements IFilterClicked{
         return new File(mediaStorageDir.getAbsolutePath() + File.separator +
                 "IMG_"+ num + ".jpg");
     }
+
 }

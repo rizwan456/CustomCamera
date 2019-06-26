@@ -1,4 +1,4 @@
-package com.rizz.customcamera;
+package com.rizz.customcamera.customcamera;
 
 import android.content.Context;
 import android.hardware.Camera;
